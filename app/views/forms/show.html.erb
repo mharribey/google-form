@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @form.title %><br><br>
+
+  <%= simple_form_for @form, :url => form_match_path, method: :post do |f| %>
+    <% @form.questions.each do |question| %>
+      <i>Question : <%= question.title %></i><br>
+        <% answers = question.answers %>
+        <div style="display:flex;margin:1em 3em">
+          <%= collection_radio_buttons(:response, question.id, answers, :id, :content) do |b| %>
+            <div style="display:flex;">
+              <%=  b.label { b.radio_button } %><%= b.text %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <br><br>
+      <%= f.submit 'Go to your result' %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_form_path(@form) %> |
+<%= link_to 'Back', forms_path %>

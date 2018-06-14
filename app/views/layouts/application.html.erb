@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Qcm</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= link_to "ACCUEIL", root_path %>
+    <%= link_to "NOTES", form_note_path %>
+    <% if user_signed_in? %>
+      <%= link_to "Déconnexion", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Connexion", new_user_session_path %>
+      <%= link_to "Inscription", new_user_registration_path %>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

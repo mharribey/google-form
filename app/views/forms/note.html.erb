@@ -1,0 +1,11 @@
+
+<% @forms.each do |form| %>
+  <% form_answers = Answer.all.map{ |a| (form.questions.include? a.question) ? a : nil} %>
+
+  <br>
+  <% x = (current_user.answers.where(validation: true) & form_answers).count %>
+  <% y = form.questions.count %>
+
+  <p>QCM : <i><%= form.title %></i>, <%= "#{x} / #{y}"%> bonnes réponses.</p>
+  <p> Ta note finale est de : <b><%= (x * 20.0 / y).round(2) %>/20.0</b> pour ce QCM.</p>
+<% end %>
