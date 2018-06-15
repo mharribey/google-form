@@ -5,7 +5,11 @@ class FormsController < ApplicationController
   end
 
   def new
-    @form = Form.new
+    if !current_user.admin?
+      redirect_to forms_path, notice: "You don't have the rights to access this page."
+    else
+      @form = Form.new
+    end
   end
 
   def create
@@ -28,7 +32,11 @@ class FormsController < ApplicationController
   end
 
   def edit
-    @form = Form.find(params[:id])
+    if !current_user.admin?
+      redirect_to forms_path, notice: "You don't have the rights to access this page."
+    else
+      @form = Form.find(params[:id])
+    end
   end
 
   def show
