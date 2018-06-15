@@ -3,7 +3,11 @@
 <p>
   <strong>Title:</strong>
   <%= @form.title %><br><br>
+  <h4> ATTENTION : à la fin du timer, le QCM se validera automatiquement ! </h4>
 
+  <% unless current_user.admin? %>
+    <p id="time-left">Temps restant : <b>--h : --m : --s</b></p>
+  <% end %>
   <%= simple_form_for @form, :url => form_match_path, method: :post do |f| %>
     <% @form.questions.each do |question| %>
       <i>Question : <%= question.title %></i><br>
@@ -19,6 +23,9 @@
       <br><br>
       <%= f.submit 'Go to your result' %>
   <% end %>
+
+  <%= javascript_tag "startTimer(#{@form.timer},#{@form.id})" %>
+
 </p>
 
 <%= link_to 'Edit', edit_form_path(@form) %> |
