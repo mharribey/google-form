@@ -1,20 +1,23 @@
-  function startTimer(time,id){
-    const init = document.getElementById("time-left");
-    const form = document.getElementById("edit_form_"+id);
-    const totalTime = time;
+  var totalTime;
+  var clock;
+  var form;
 
-    var timer = 0;
-    time = time * 60;
+  function getValues(time,id){
+    form = document.getElementById("edit_form_"+id);
+    totalTime = time * 60;
+  }
 
-    setInterval(function(){
-      console.log(time);
-
-      time -= 1;
-      timer = Math.floor(time / 3600 % 60 ) + "h : " + Math.floor(time / 60 % 60) + "m : " + time % 60 + "s";
-
-      if(time <= 0){
-        form.submit();
-      }
-      init.innerHTML = "Temps restant : <b>" + timer + "</b>";
-    },1000);
+  function startTimer(){
+    setTimeout(function(){
+      clock = $('.timer').FlipClock(totalTime, {
+            clockFace: 'HourCounter',
+            countdown: true,
+            autoStart: true,
+            callbacks: {
+		        	stop: function() {
+		        		form.submit();
+		        	}
+		        }
+        });
+    },500);
   }

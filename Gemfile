@@ -8,6 +8,7 @@ end
 gem 'devise'
 gem 'simple_form'
 gem "cocoon"
+gem 'bourbon'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
