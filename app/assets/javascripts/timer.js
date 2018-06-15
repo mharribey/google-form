@@ -10,9 +10,7 @@
   function startTimer(){
     setTimeout(function(){
       clock = $('.timer').FlipClock(totalTime, {
-            clockFace: 'HourCounter',
             countdown: true,
-            autoStart: true,
             callbacks: {
 		        	stop: function() {
 		        		form.submit();
