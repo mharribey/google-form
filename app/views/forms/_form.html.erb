@@ -1,6 +1,7 @@
 <h1>Add questions to form</h1>
 <%= simple_form_for @form do |f| %>
   Name: <%= f.text_field :title %>
+  Timer (en min): <%= f.text_field :timer %>
   <% @form.questions.each do |question| %>
     <div style="background-color:grey;color:white;margin:1em;padding:0.5em;">
       <%= f.fields_for :questions, question do |q| %>

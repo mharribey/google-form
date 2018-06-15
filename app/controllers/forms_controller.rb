@@ -36,7 +36,7 @@ class FormsController < ApplicationController
     if Form.answered(@form, current_user) != true
       render :show
     else
-      redirect_to root_path
+      redirect_to root_path, notice: 'You cannot access to this form.'
     end
   end
 
@@ -67,6 +67,6 @@ class FormsController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
-      params.require(:form).permit(:title, questions_attributes: [:id, :title, :_destroy, answers_attributes: [:id, :content, :validation, :_destroy]])
+      params.require(:form).permit(:title, :timer, questions_attributes: [:id, :title, :_destroy, answers_attributes: [:id, :content, :validation, :_destroy]])
     end
 end
