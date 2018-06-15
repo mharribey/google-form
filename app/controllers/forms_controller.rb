@@ -55,6 +55,15 @@ class FormsController < ApplicationController
     @forms = Form.all
   end
 
+  def destroy
+    @form = Form.find(params[:id])
+    @form.destroy
+    respond_to do |format|
+      format.html { redirect_to forms_path, notice: 'Form was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
