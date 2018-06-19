@@ -1,10 +1,11 @@
 
 <% @forms.each do |form| %>
   <% unless form.questions.empty? && !current_user.admin? %>
-    <% form_answers = Answer.all.map{ |a| (form.questions.include? a.question) ? a : nil} %>
 
+    <!-- Renvoi toutes les réponses associés au questionnaire -->
+    <% form_answers = Answer.all.map{ |a| (form.questions.include? a.question) ? a : nil} %>
     <br>
-    <% x = (current_user.answers.where(validation: true) & form_answers).count %>
+    <% x = matchAnswers(current_user, form)%>
     <% y = form.questions.count %>
 
     <p>QCM : <i><%= form.title %></i>, <%= "#{x} / #{y}"%> bonnes réponses.</p>
