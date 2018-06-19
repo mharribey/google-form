@@ -49,13 +49,14 @@ class FormsController < ApplicationController
   end
 
   def match
-    params[:response].each do |k|
-      if !params[:response][k].blank?
-      answer = Answer.find(params[:response][k])
-      current_user.answers << answer
+    params[:response].each do |question|
+      params[:response][question].each do |answer_id|
+        if !answer_id.blank?
+          answer = Answer.find(answer_id)
+          current_user.answers << answer
+        end
       end
     end
-
     redirect_to form_note_path
   end
 
@@ -73,8 +74,9 @@ class FormsController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def form_params
-      params.require(:form).permit(:title, :timer, questions_attributes: [:id, :title, :_destroy, answers_attributes: [:id, :content, :validation, :_destroy]])
-    end
+
+  def form_params
+    params.require(:form).permit(:title, :timer, questions_attributes: [:id, :title, :_destroy, answers_attributes: [:id, :content, :validation, :_destroy]])
+  end
+
 end

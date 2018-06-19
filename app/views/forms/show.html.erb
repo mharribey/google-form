@@ -13,9 +13,9 @@
       <i>Question : <%= question.title %></i><br>
         <% answers = question.answers %>
         <div style="display:flex;margin:1em 3em">
-          <%= collection_radio_buttons(:response, question.id, answers, :id, :content) do |b| %>
+          <%= collection_check_boxes(:response, question.id, answers, :id, :content) do |b| %>
             <div style="display:flex;">
-              <%=  b.label { b.radio_button } %><%= b.text %>
+              <%=  b.label { b.check_box } %><%= b.text %>
             </div>
           <% end %>
         </div>
