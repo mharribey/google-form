@@ -12,4 +12,8 @@ module FormsHelper
     return x
   end
 
+  def getNote(x,y)
+    return finalNote = (x * 20.0 / y).nan? ? "0.0" : (x * 20.0 / y).round(2)
+  end
+
 end
